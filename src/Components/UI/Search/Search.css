@@ -1,0 +1,26 @@
+.SearchBox{
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.SearchBar{
+    width: 60%;
+    height: 25px;
+    border:none;
+    border-radius: 20px;
+    padding: 1% 3%;
+    font-size: 20px;
+    font-family: inherit;
+    background-color: rgb(238, 236, 236);
+}
+
+.red{
+    background-color: rgb(231, 150, 141);
+}
+
+.SearchBar:focus,.SearchBar:hover{
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}

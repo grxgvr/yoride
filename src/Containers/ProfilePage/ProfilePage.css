@@ -1,0 +1,42 @@
+
+.card {
+    background-color: aliceblue;
+    margin: 20% auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    padding-top: 15px;
+    cursor: default;
+}
+
+.card p{
+    margin-top: 10px;
+}
+.cardButton{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.green{
+    background-color: rgb(56, 150, 56);
+}
+.green:hover {
+    background-color: rgb(69, 185, 69);
+}
+.exit{
+    background-color: rgb(194, 59, 32);
+}
+.exit:hover{
+    background-color: rgb(226, 73, 42);
+}
+.title {
+  color: grey;
+  font-size: 18px;
+}

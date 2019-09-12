@@ -1,0 +1,38 @@
+.Homepage{
+    margin: 0 auto;
+    margin-top: 70px;
+    background-color: white;
+    width: 80%;
+    height: 90vh;
+    overflow: auto;
+}
+
+.menu{
+    text-align: center;
+    padding: 20px;
+}
+
+.submenu{
+    flex: 1 1 300px;
+    background-color: brown;
+    height: 50px;
+}
+.menu h2, .menu h4{
+    font-weight: normal;
+}
+.label{
+    margin: 0 auto;
+}
+
+@media(max-width:450px){
+    .Homepage{
+        width: 100%;
+        background-color: rgba(199, 199, 199, 0.288);
+    }
+    .menu h2{
+        color: rgb(228, 228, 228);
+    }
+    .menu label{
+        color: rgb(221, 221, 221);
+    }
+}

@@ -1,0 +1,12 @@
+.Content label{
+    display: block;
+    margin: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.Content label:hover{
+    opacity: 1;
+}

@@ -1,0 +1,120 @@
+.bar {
+  background-color: steelblue;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  font-family: inherit;
+}
+
+.bar ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  padding: 0 20px;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.bar li {
+  cursor: pointer;
+  margin: 0 15px;
+  font-size: 17px;
+  vertical-align: bottom;
+}
+
+.bar a {
+  color: rgb(213, 233, 252);
+  text-decoration: none;
+}
+
+.bar a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+li span {
+  vertical-align: middle;
+  padding: 8px;
+}
+
+#toggleMenu{
+  font-size: 24px;
+  display: none;
+  padding-top: 5px;
+}
+
+.collapseMenu{
+  z-index: 0;
+  background-color: rgba(141, 176, 206, 0.95);
+  height: 180px;
+  width: 100%;
+  margin-top: 70px;
+  position: absolute;
+  display: none;
+}
+.collapseMenu #toggleMenu, .collapseMenu #brand{
+  display: none;
+}
+.collapseMenu ul{
+  list-style: none;
+  text-align: left;
+}
+.collapseMenu a{
+  color: rgb(213, 233, 252);
+  text-decoration: none;
+  cursor: pointer;
+}
+.collapseMenu a:hover{
+  color: white;
+}
+.collapseMenu li{
+  margin-top: 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+#brand {
+  margin-right: auto;
+  margin-left: 30px;
+  font-size: 28px;
+}
+#brand a:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+ 
+  .bar li{
+    font-size: 14px;
+  }
+  #brand {
+    font-size: 24px;
+    display: inline;
+    text-align: center;
+  }
+}
+@media (max-width: 800px) {
+ .bar li{
+    font-size: 12px;
+  }
+}
+@media (max-width: 700px) {
+ .bar li{
+    font-size: 11px;
+  }
+}
+@media (max-width: 600px) {
+  .bar li{
+    display: none;
+  }
+  #toggleMenu{
+    display: block;
+  }
+  .collapseMenu{
+    display: block;
+  }
+  #brand {
+  margin-left: 10px;
+  }
+}
+

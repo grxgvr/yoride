@@ -1,0 +1,116 @@
+.searchmatch {
+  color: red;
+}
+
+.ResultElement {
+  background-color: rgb(240, 238, 238);
+  border-radius: 30px;
+  border: 1px solid rgb(146, 146, 146);
+  padding: 10px;
+  margin: 20px 0;
+}
+
+.ResultElement h3 {
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.ResultElement hr {
+  margin-bottom: 20px;
+  border: 1px solid rgba(31, 31, 31, 0.7);
+}
+
+.ResultElement p {
+  margin: 10px 0;
+}
+
+.ResultElement a {
+  width: 70px;
+  display: block;
+  text-decoration: none;
+  color: rgb(13, 54, 116);
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.ResultElement a:hover {
+  color: rgb(15, 91, 206);
+  text-decoration: underline;
+}
+
+.ResultElement a:visited {
+  color: rgb(81, 34, 209);
+}
+
+.ResultElement .icon {
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.delimeter {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ResultElement .bottomInfo {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 5px;
+  width: 80%;
+  font-size: 18px;
+  align-items: center;
+}
+.price {
+  color: green;
+  font-size: 25px;
+}
+
+.profPic {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  margin: 10px;
+  margin-left: 0;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.profPicSmall {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  margin-left: 0;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.profPicBig {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  margin-right: 10px;
+  margin-left: 0;
+  vertical-align: middle;
+}
+
+@media (max-width: 800px) {
+  .ResultElement {
+    font-size: 14px;
+    padding: 4px;
+  }
+  .ResultElement h3 {
+    font-size: 15px;
+  }
+  .ResultElement span {
+    font-size: 13px;
+  }
+
+  .profPic {
+    height: 40px;
+    width: 40px;
+  }
+}
+

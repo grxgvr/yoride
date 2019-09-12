@@ -1,0 +1,18 @@
+#load{
+    z-index: 5;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    margin: 30px auto;
+    border-radius: 50%;
+    border: 7px solid #cccccc;
+    border-bottom-color: #2578c0;
+    margin-bottom: 10px;
+    animation: 0.6s spin linear infinite; 
+}
+
+@keyframes spin{
+    100%{
+      transform: rotate(360deg);
+    }
+}

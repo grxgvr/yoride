@@ -1,0 +1,13 @@
+.HelloBox{
+    margin-top: 70px;
+    position: absolute;
+    width: 100vw;
+    height: 80vh;
+    color: white;
+    font-family: inherit;
+    padding: 100px 20%;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
