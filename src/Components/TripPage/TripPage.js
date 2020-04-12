@@ -7,8 +7,17 @@ class TripPage extends Component {
   state = {
     isEdit: false,
     open: false,
-    user: null
+    user: null,
+    cargo: false
   };
+  componentDidMount = () => {
+    this.setState({
+      isEdit: false,
+      open: false,
+      user: null,
+      cargo: false
+    })
+  }
   toggleProfPage = (user) => {
     if (this.state.open) {
       this.setState({ open: false, user: null });
@@ -16,8 +25,16 @@ class TripPage extends Component {
       this.setState({ open: true, user });
     }
   };
+  toggleCargo = () => {
+    console.log(this.state.cargo)
+    if (this.state.cargo) {
+      this.setState({ cargo: false});
+    } else {
+      this.setState({ cargo: true});
+    }
+  }
   render() {
-    let button, passengers;
+    let button, passengers, label
     let page =
       this.state.open ? (
         <ProfilePage
@@ -26,7 +43,10 @@ class TripPage extends Component {
           isUser={false}
         />
       ) : null;
-    if (this.props.element.driver === this.props.uid)
+    let cargo = this.state.cargo ? (
+        <div>Свяжитесь с водителем для обговора деталей</div>
+    ) : null
+    if (this.props.element.driver === this.props.uid){
       button = (
         <button
           onClick={() => {
@@ -38,12 +58,15 @@ class TripPage extends Component {
           Удалить
         </button>
       );
-    else if (this.props.tripsIds.indexOf(this.props.element.id) < 0)
+    }
+    else if (this.props.tripsIds.indexOf(this.props.element.id) < 0){
       button = (
         <button onClick={this.props.book} className="cardButton green rounded">
           Забронировать
         </button>
       );
+      label = <label className='gruz' onClick={this.toggleCargo}>Мне нужно перести груз</label>
+    }
     else
       button = (
         <button
@@ -90,6 +113,7 @@ class TripPage extends Component {
               <span className="delimeter" />
               {this.props.element.arrivalTime}
             </p>
+            {this.props.element.alsoTo ? <p>Проездом: {this.props.element.alsoTo}</p>: null}
             <hr />
             <div className="tripFlex">
               <div className="leftInfo">
@@ -125,10 +149,12 @@ class TripPage extends Component {
             <div>Связь: {this.props.element.driverPhone}</div>
             <br />
             <span>
-              Цена: <span className="price">{this.props.element.price} р.</span> + комиссия {this.props.element.price * 0.02}
+              Цена: <span className="price">{this.props.element.price} р.</span>
             </span>
             <br />
           </div>
+          {label}
+          {cargo}
           {button}
         </div>
       </div>

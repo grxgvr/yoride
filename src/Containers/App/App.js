@@ -69,7 +69,6 @@ class App extends Component {
               });
             });
           }
-
           this.setState({ user: userData, takenTrips });
         });
         let data = db

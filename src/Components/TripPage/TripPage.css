@@ -18,6 +18,10 @@
   border-radius: 25px;
   vertical-align: middle;
 }
+.gruz{
+    opacity: 0.7;
+    cursor: pointer;
+}
 
 .padded{
   padding: 20px;
@@ -77,6 +81,10 @@
 
 .passenger span{
     cursor: pointer;
+}
+
+.gruz:hover{
+    opacity: 1;
 }
 
 @media (max-width: 900px) {

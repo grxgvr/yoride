@@ -16,6 +16,9 @@ class AddPage extends Component {
       value: "",
       validated: null
     },
+    alsoTo:{
+      value: "",
+    },
     price: {
       value: "",
       validated: null
@@ -73,6 +76,7 @@ class AddPage extends Component {
         .push({
           from: state.from.value,
           to: state.to.value,
+          alsoTo: state.alsoTo.value,
           date: document.getElementById('date').value,
           departTime: state.departTime.value,
           arrivalTime: state.arrivalTime.value,
@@ -113,6 +117,12 @@ class AddPage extends Component {
             validated={this.state.to}
             changed={e => this.changeInputHandler("to", e.target.value)}
           />
+          <label>Проездом*</label>
+          <Input
+            type="input"
+            validated={this.state.to}
+            changed={e => this.changeInputHandler("alsoTo", e.target.value)}
+          />
           <label>Цена</label>
           <Input
             type="number"
@@ -144,7 +154,7 @@ class AddPage extends Component {
             validated={this.state.arrivalTime}
             changed={e => this.changeInputHandler("seats", e.target.value)}
           />
-          <label>*Комментарий</label>
+          <label>Комментарий*</label>
           <Input
             type="textarea"
             validated

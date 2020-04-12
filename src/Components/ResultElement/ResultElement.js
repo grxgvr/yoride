@@ -12,9 +12,10 @@ const resultElement = (props) => (
             {props.element.to}
         </h3>
         <p>{props.element.departTime}<span className='delimeter'></span>{props.element.arrivalTime}</p>
+        {props.element.alsoTo ? <p>Проездом: {props.element.alsoTo}</p>: null}
         <div className='bottomInfo'>
             <span><img src={props.element.driverPic} className='profPic' alt='profileImg'></img>{props.element.driverName}</span>
-            <span className='price'>{parseInt(props.element.price)+ props.element.price * 0.02} р.</span>
+            <span className='price'>{parseInt(props.element.price)} р.</span>
         </div>
         <div className='bottomInfo'>
             <span>Авто: {props.element.driverAuto}</span>

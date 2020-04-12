@@ -33,12 +33,14 @@ class SearchPage extends Component {
         .orderByChild("from")
         .startAt(from);
       let results = [];
-      let trip;
+      let trip, alsoTo;
       ref.once("value", snap => {
         snap.forEach(entry => {
           trip = entry.val();
+          if(trip.alsoTo)
+            alsoTo = trip.alsoTo.indexOf(to) > -1
           if (
-            trip.to.indexOf(to) > -1 &&
+            (trip.to.indexOf(to) > -1 || alsoTo) &&
             new Date(trip.date) > new Date(date.value)
           ) {
             trip.id = entry.key;
