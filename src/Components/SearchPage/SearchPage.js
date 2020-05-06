@@ -39,27 +39,32 @@ class SearchPage extends Component {
           trip = entry.val();
           if(trip.alsoTo)
             alsoTo = trip.alsoTo.indexOf(to) > -1
-          if (
-            (trip.to.indexOf(to) > -1 || alsoTo) &&
-            new Date(trip.date) > new Date(date.value)
-          ) {
-            trip.id = entry.key;
-            if (trip.passengers) {
-              trip.seatsRemain = trip.seatsRemain - trip.passengers.length;
-              let passengersArr = [];
-              trip.passengers.forEach(id => {
-                let ref = firebase.database().ref(`/users/${id}`);
-                ref.once("value", snap => {
-                  let info = snap.val();
-                  info.id = snap.key;
-                  passengersArr.push(info);
-                });
-                trip.passengers = passengersArr;
+          if ((trip.to.indexOf(to) > -1 || alsoTo) &&
+            new Date(trip.date) > new Date(date.value))
+            {
+              trip.id = entry.key;
+              let driver, info, ref = firebase.database().ref(`/users/${trip.driver}`)
+              ref.once("value", snap => {
+                info = snap.val();
+                info.id = snap.key;
+                trip.driver = {...info};
               });
+              if (trip.passengers) {
+                trip.seatsRemain = trip.seatsRemain - trip.passengers.length;
+                let passengersArr = [];
+                trip.passengers.forEach(id => {
+                  ref = firebase.database().ref(`/users/${id}`);
+                  ref.once("value", snap => {
+                    info = snap.val();
+                    info.id = snap.key;
+                    passengersArr.push(info);
+                  });
+                  trip.passengers = passengersArr;
+                });
             }
             if(trip.seatsRemain > 0)
             results.push(trip);
-          }
+            }
         });
         if (results.length > 0)
           this.setState({ searchResults: results, isLoading: false });

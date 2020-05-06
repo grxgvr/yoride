@@ -3,10 +3,12 @@
     background-color: aliceblue;
     margin: 10% auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
+    width: 300px;
+    height: fit-content;
     text-align: center;
     padding-top: 15px;
     cursor: default;
+    overflow: auto;
 }
 
 .wide{
@@ -19,6 +21,10 @@
 
 .about{
     white-space: pre-line;
+}
+
+.starIcon{
+    color: goldenrod;
 }
 
 .cardButton{

@@ -47,12 +47,13 @@ li span {
 .collapseMenu{
   z-index: 0;
   background-color: rgba(141, 176, 206, 0.95);
-  height: 180px;
+  height: 215px;
   width: 100%;
   margin-top: 70px;
   position: absolute;
   display: none;
 }
+
 .collapseMenu #toggleMenu, .collapseMenu #brand{
   display: none;
 }
@@ -82,28 +83,27 @@ li span {
   text-decoration: none;
 }
 
-@media (max-width: 900px) {
- 
+@media (max-width: 1100px) {
   .bar li{
     font-size: 14px;
   }
   #brand {
-    font-size: 24px;
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 900px) {
+  .bar li{
+    font-size: 10px;
+  }
+  #brand {
+    font-size: 20px;
     display: inline;
     text-align: center;
   }
 }
+
 @media (max-width: 800px) {
- .bar li{
-    font-size: 12px;
-  }
-}
-@media (max-width: 700px) {
- .bar li{
-    font-size: 11px;
-  }
-}
-@media (max-width: 600px) {
   .bar li{
     display: none;
   }

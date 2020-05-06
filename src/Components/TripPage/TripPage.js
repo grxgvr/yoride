@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import Input from '../UI/Input/Input';
+import Rater from 'react-rater'
+import 'react-rater/lib/react-rater.css'
+import firebase from "firebase/app";
 import ProfilePage from "../../Containers/ProfilePage/ProfilePage";
 import "./TripPage.css";
 
@@ -8,15 +12,19 @@ class TripPage extends Component {
     isEdit: false,
     open: false,
     user: null,
-    cargo: false
+    cargo: false,
+    rvwToggle: false,
+    rate: 0
   };
   componentDidMount = () => {
     this.setState({
       isEdit: false,
       open: false,
       user: null,
-      cargo: false
+      cargo: false,
+      rvwToggle: false
     })
+    console.log(this.props.element)
   }
   toggleProfPage = (user) => {
     if (this.state.open) {
@@ -26,12 +34,25 @@ class TripPage extends Component {
     }
   };
   toggleCargo = () => {
-    console.log(this.state.cargo)
     if (this.state.cargo) {
       this.setState({ cargo: false});
     } else {
       this.setState({ cargo: true});
     }
+  }
+  toggleReview = () => {
+    if (this.state.rvwToggle) {
+      this.setState({ rvwToggle: false});
+    } else {
+      this.setState({ rvwToggle: true});
+    }
+  }
+  onRate = (rate) => {
+    this.setState({rate})
+  }
+  sendReview = () => {
+    let db = firebase.database();
+    this.props.toggle();
   }
   render() {
     let button, passengers, label
@@ -65,9 +86,27 @@ class TripPage extends Component {
           Забронировать
         </button>
       );
-      label = <label className='gruz' onClick={this.toggleCargo}>Мне нужно перести груз</label>
+      label = <label className='gruz' onClick={this.toggleCargo}>Мне нужно перевезти груз</label>
     }
-    else
+    else if(this.props.intention == 'history'){
+      if(this.state.rvwToggle){
+        label = (
+          <span>
+            <Rater id='rate' total={5} rating={0} />
+            <Input
+            type="textarea"
+            placeholder="Расскажите о своих впечатлениях"/>
+          </span>
+        )
+        button = <button
+          onClick={this.sendReview}
+          className="cardButton green rounded">
+          Оставить отзыв
+        </button>
+      } else 
+      label = <label className='gruz' onClick={this.toggleReview}>Оставить отзыв</label>
+    }
+    else {
       button = (
         <button
           onClick={() => {
@@ -79,6 +118,7 @@ class TripPage extends Component {
           Отменить бронирование
         </button>
       );
+    }
     passengers = this.props.element.passengers ? (
       <div className="passengers">
         <p>Пассажиры</p>
@@ -118,7 +158,7 @@ class TripPage extends Component {
             <div className="tripFlex">
               <div className="leftInfo">
                 <div className="bottomInfo">
-                  <span className="fontBig">
+                  <span className="fontBig" style={{cursor: 'pointer'}} onClick={() => this.toggleProfPage(this.props.element.driver)}>
                     <img
                       src={this.props.element.driverPic}
                       className="profPic" alt='profileImg'
@@ -152,6 +192,7 @@ class TripPage extends Component {
               Цена: <span className="price">{this.props.element.price} р.</span>
             </span>
             <br />
+            <hr />
           </div>
           {label}
           {cargo}

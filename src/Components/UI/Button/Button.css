@@ -15,7 +15,7 @@
 
 .btn:hover{
     width:150px;
-    transform: scale(1.08);
+    transform: scale(1.03);
     background-color: rgb(14, 212, 113);
 }
 

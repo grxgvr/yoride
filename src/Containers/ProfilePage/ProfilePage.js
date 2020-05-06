@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./ProfilePage.css";
 import Input from "../../Components/UI/Input/Input";
 import Spinner from "../../Components/UI/Spinner/Spinner";
+import { FaStar } from "react-icons/fa";
 import firebase from "firebase/app";
 
 class ProfilePage extends Component {
@@ -108,9 +109,12 @@ class ProfilePage extends Component {
               <div className="card">
                 <img src={this.state.user.photoURL} className="profPicBig" alt='profileImage'/>
                 <h1>{this.state.user.name}</h1>
+              <span className="icon">
+                <FaStar className='starIcon' /> 2/5
+              </span>
                 <p className="title">{this.state.user.phone}</p>
-                <p>Машина: {this.state.user.auto}</p>
-                <p className='about'>О себе: {this.state.user.about}</p>
+                <p><b>Машина</b>: {this.state.user.auto}</p>
+                <p className='about'><b>О себе</b>: {this.state.user.about}</p>
                   {buttons}
               </div>
             </div>

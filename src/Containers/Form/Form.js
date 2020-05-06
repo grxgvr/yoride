@@ -126,7 +126,9 @@ class Form extends Component {
               name: check.name.value,
               photoURL: check.profPic.value,
               auto: check.auto.value,
-              phone: check.phone.value
+              phone: check.phone.value,
+              rating: null,
+              reviews: []
             })
           })
           .then(this.setState({ load: false, wasError: null }))
@@ -151,7 +153,6 @@ class Form extends Component {
     }
   };
   changeInputHandler = (type, value) => {
-    console.log(value)
     let state = this.state;
     state.user[type].value = value;
     state.user[type].validated = true;

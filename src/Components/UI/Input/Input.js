@@ -26,7 +26,7 @@ const input = (props) => {
           inputEl = <input type="time" className={classes} value={props.value} onChange={props.changed} placeholder={props.placeholder}/>;
           break;
         case "phone":
-          inputEl = <IMaskInput mask='+{7}-000-000-00-00' className={classes} onChange={props.changed} placeholder={props.placeholder} defaultValue={props.value}/>;
+          inputEl = <IMaskInput mask='+{7}-000-000-00-00' className={classes} onChange={props.changed} placeholder={props.placeholder}/>;
           break;
         case "number":
           inputEl = <IMaskInput mask={Number} min={0} className={classes} onChange={props.changed} placeholder={props.placeholder}/>;

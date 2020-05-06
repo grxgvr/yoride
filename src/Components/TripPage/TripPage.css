@@ -5,122 +5,136 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  display: flex;
 }
-.tripContent{
-    font-size: 16px;
-    background-color: #fefefe;
-  margin: 8% auto; /* 15% from the top and centered */
+.tripContent {
+  font-size: 16px;
+  background-color: #fefefe;
+  margin: 85px auto;
   border: 1px solid #888;
-  width: 40%; 
+  width: 40%;
   cursor: default;
   border-radius: 25px;
   vertical-align: middle;
+  overflow: auto;
 }
-.gruz{
-    opacity: 0.7;
-    cursor: pointer;
+.gruz {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
-.padded{
+.padded {
   padding: 20px;
 }
 
-.fontBig{
-    font-size: 20px;
+.fontBig {
+  font-size: 20px;
 }
 
-.fontMed{
-    font-size: 16px;
+.fontMed {
+  font-size: 16px;
 }
 
-.fontSm{
-    font-size: 14px;
+.fontSm {
+  font-size: 14px;
 }
 
-.rounded{
-    border-radius: 0 0 23px 23px;
+.rounded {
+  border-radius: 0 0 23px 23px;
 }
-.tripContent .icon{
-    vertical-align: middle;
-    padding: 10px;
-}
-
-.tripContent hr{
-    margin: 5px 0;
+.tripContent .icon {
+  vertical-align: middle;
+  padding: 10px;
 }
 
-.tripFlex{
-    display: flex;
-    justify-content: space-between;
+.tripContent hr {
+  margin: 5px 0;
+}
+
+.tripFlex {
+  display: flex;
+  justify-content: space-between;
   text-align: left;
   margin: 0 10px;
-
 }
 
-.leftInfo{
-    flex-basis: 50%;
+.leftInfo {
+  flex-basis: 50%;
 }
 
-.rightInfo{
-    text-align: left;   
+.rightInfo {
+  text-align: left;
 }
 
-.comment{
-    font-size: 16px;
+.comment {
+  font-size: 16px;
 }
 
-.passengers{
-    width: 100%;
+.passengers {
+  width: 100%;
 }
 
-.passenger{
-    width: 100%;
+.passenger {
+  width: 100%;
 }
 
-.passenger span{
-    cursor: pointer;
+.passenger span {
+  cursor: pointer;
 }
 
-.gruz:hover{
-    opacity: 1;
+.gruz:hover {
+  opacity: 1;
 }
+
+.tripPage ::-webkit-scrollbar{
+  display: none;
+}
+
+#rate{
+  font-size: 30px;
+}
+
+
+
+$react-rater-hover: rgb(234, 236, 69) !default; 
+$react-rater-active: #000 !default;
 
 @media (max-width: 900px) {
-    .tripContent{
-        font-size: 14px;
-        margin-top: 15%;
-        width: 400px;
-    }
-    .comment{
-        font-size: 12px;
-    }
+  .tripContent {
+    font-size: 14px;
+    margin-top: 15%;
+    width: 400px;
+  }
+  .comment {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 500px) {
-    .tripContent{
-        font-size: 12px;
-        margin-top: 30%;
-        width: 90%;
-    }
-    .comment{
-        font-size: 9px;
-    }
-    .price{
-        font-size: 18px;
-    }
-    .fontBig{
-        font-size: 14px;
-    }
+  .tripContent {
+    font-size: 12px;
+    margin-top: 30%;
+    width: 90%;
+  }
+  .comment {
+    font-size: 9px;
+  }
+  .price {
+    font-size: 18px;
+  }
+  .fontBig {
+    font-size: 14px;
+  }
 }
 @media (max-width: 400px) {
-    .tripContent{
-        font-size: 11px;
-        margin-top: 30%;
-        width: 90%;
-    }
-    .comment{
-        font-size: 9px;
-    }
+  .tripContent {
+    font-size: 11px;
+    margin-top: 30%;
+    width: 90%;
+  }
+  .comment {
+    font-size: 9px;
+  }
 }

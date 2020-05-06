@@ -35,10 +35,24 @@ const list = props => {
       </div>
       </div>
     ) : null;
+  let historyTrips = props.historyTrips !== undefined ? (
+    <div className="list">
+    {props.historyTrips.map(element => (
+      <ResultElement
+        element={element}
+        key={element.id}
+        toggle={props.toggle}
+        type={"h"}
+      />
+    ))}
+  </div>
+  )
+  :null
   return (
     <div>
       {suggTrips}
       {takenTrips}
+      {historyTrips}
     </div>
   );
 };

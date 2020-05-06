@@ -36,11 +36,12 @@
 }
 
 ::-webkit-scrollbar{
-    width: 10px;
-    height: 10px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-thumb{
+    border-radius: 50px;
+    height: 20px;
     background: rgba(0, 0, 0, 0.2)
 }
 
@@ -49,5 +50,5 @@
 }
 
 ::-webkit-scrollbar-thumb:active{
-    background: rgba(0, 0, 0, 0.3)
+    background: rgba(0, 0, 0, 0.5)
 }

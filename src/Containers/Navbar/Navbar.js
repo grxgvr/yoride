@@ -5,7 +5,8 @@ import {
   FaSuitcase,
   FaSearch,
   FaPlusCircle,
-  FaBars
+  FaBars,
+  FaHistory
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import ProfilePage from '../ProfilePage/ProfilePage';
@@ -50,6 +51,14 @@ class Navbar extends Component {
                 <FaRoad />
               </span>
               Попутчик!
+            </NavLink>
+          </li>
+          <li onClick={this.closeMenu}>
+            <NavLink to="/history">
+              <span className="icon">
+                <FaHistory />
+              </span>
+              История поездок
             </NavLink>
           </li>
           <li onClick={this.closeMenu}>
