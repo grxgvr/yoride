@@ -10,10 +10,12 @@ class ProfilePage extends Component {
   state = {
     edit: false,
     user: null,
-    editUser: null
+    editUser: null,
+    showRevs: false
   }
   componentDidMount = () => {
     this.setState({user: this.props.user})
+    console.log(this.props)
   }
   changeInputHandler = (type, value) => {
     // console.log(type, value)
@@ -36,8 +38,13 @@ class ProfilePage extends Component {
       }).then(() => this.setState({user: {...this.state.editUser}, edit: false}))
     }
   }
+  toggleReviews = () => {
+    if(this.state.showRevs)
+      this.setState({showRevs: false})
+    else
+      this.setState({showRevs: true})
+  }
   render() {
-    console.log(this.state)
     let content, buttons
     if(!this.state.user){
       content = <Spinner />
@@ -89,6 +96,13 @@ class ProfilePage extends Component {
           </div>
         )
       } else {
+        let revs
+        if(this.state.showRevs){
+          revs = this.state.user.reviews ? 
+          <div className='reviews'>
+            {Object.values(this.state.user.reviews).map((rev,i) => <p key={i}><FaStar className='starIcon' /> {rev.rate}/5 - {rev.review}</p>)}
+          </div> : <p>У этого пользователя нет отзывов</p>
+        } else revs = <br/>
           buttons = this.props.isUser ? 
           (
             <span>
@@ -110,11 +124,13 @@ class ProfilePage extends Component {
                 <img src={this.state.user.photoURL} className="profPicBig" alt='profileImage'/>
                 <h1>{this.state.user.name}</h1>
               <span className="icon">
-                <FaStar className='starIcon' /> 2/5
+                <FaStar className='starIcon' /> {this.state.user.rate}/5
               </span>
                 <p className="title">{this.state.user.phone}</p>
                 <p><b>Машина</b>: {this.state.user.auto}</p>
                 <p className='about'><b>О себе</b>: {this.state.user.about}</p>
+                <label className='gruz' onClick={this.toggleReviews}>Отзывы</label>
+                {revs}
                   {buttons}
               </div>
             </div>

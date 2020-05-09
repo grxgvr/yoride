@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaUser } from "react-icons/fa";
 import Input from '../UI/Input/Input';
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
@@ -14,17 +14,34 @@ class TripPage extends Component {
     user: null,
     cargo: false,
     rvwToggle: false,
-    rate: 0
+    rate: 0,
+    allowToRev: false
   };
   componentDidMount = () => {
-    this.setState({
-      isEdit: false,
-      open: false,
-      user: null,
-      cargo: false,
-      rvwToggle: false
-    })
-    console.log(this.props.element)
+    if(this.props.intention == 'history'){
+      let db = firebase.database()
+      let revRef = db.ref(`/users/${this.props.element.driver.id}/reviews/${this.props.uid}`);
+      revRef.once("value", snap => {
+        let rev = snap.val();
+        this.setState({
+          isEdit: false,
+          open: false,
+          user: null,
+          cargo: false,
+          rvwToggle: false,
+          rate: 0,
+          allowToRev: rev === null
+        })
+      })
+    } else {
+      this.setState({
+        isEdit: false,
+        open: false,
+        user: null,
+        cargo: false,
+        rvwToggle: false
+      })
+    }
   }
   toggleProfPage = (user) => {
     if (this.state.open) {
@@ -47,12 +64,37 @@ class TripPage extends Component {
       this.setState({ rvwToggle: true});
     }
   }
-  onRate = (rate) => {
-    this.setState({rate})
+  onRate = (e) => {
+    this.setState({rate: e.rating})
   }
   sendReview = () => {
-    let db = firebase.database();
-    this.props.toggle();
+    let review = document.getElementById('otziv').value;
+    let db = firebase.database()
+    let driverRef = db.ref(`/users/${this.props.element.driver.id}`)
+    driverRef.once("value", snap => {
+      let user = snap.val();
+      if(user.rateSum){
+        let rateSum = user.rateSum + this.state.rate, rateCount = user.rateCount + 1;
+        user = {
+          ...user,
+          rate: rateSum / rateCount,
+          rateSum,
+          rateCount,
+          reviews: { ...user.reviews, [this.props.uid]: {rate: this.state.rate, review}}
+        }
+      } else {
+        user = {
+          ...user,
+          rate: this.state.rate,
+          rateSum: this.state.rate,
+          rateCount: 1,
+          reviews: { [this.props.uid]: {rate: this.state.rate, review}}
+        }
+      }
+      // console.log(user)
+      driverRef.set(user);
+    })
+    .then(this.props.toggle())
   }
   render() {
     let button, passengers, label
@@ -89,12 +131,13 @@ class TripPage extends Component {
       label = <label className='gruz' onClick={this.toggleCargo}>Мне нужно перевезти груз</label>
     }
     else if(this.props.intention == 'history'){
-      if(this.state.rvwToggle){
+      if(this.state.rvwToggle && this.state.allowToRev){
         label = (
           <span>
-            <Rater id='rate' total={5} rating={0} />
+            <Rater id='rate' total={5} rating={this.state.rate} onRate={(e) => this.onRate(e)}/>
             <Input
             type="textarea"
+            id='otziv'
             placeholder="Расскажите о своих впечатлениях"/>
           </span>
         )
@@ -103,7 +146,7 @@ class TripPage extends Component {
           className="cardButton green rounded">
           Оставить отзыв
         </button>
-      } else 
+      } else if(this.state.allowToRev)
       label = <label className='gruz' onClick={this.toggleReview}>Оставить отзыв</label>
     }
     else {
@@ -122,12 +165,18 @@ class TripPage extends Component {
     passengers = this.props.element.passengers ? (
       <div className="passengers">
         <p>Пассажиры</p>
-        {this.props.element.passengers.map(el => (
+        {this.props.element.passengers.map(el => 
+        { let img = el.photoURL ? <img src={el.photoURL} className="profPicSmall" alt='profileImg'/> : 
+          <span className="profPicSmall">
+            <FaUser />
+          </span>
+          return (
           <div className="passenger" key={el.id}>
-            <img src={el.photoURL} className="profPicSmall" alt='profileImg'/>
+            { img }
             <span onClick={() => this.toggleProfPage(el)}>{el.name}</span>
           </div>
-        ))}
+          )}
+        )}
       </div>
     ) : null;
     return (

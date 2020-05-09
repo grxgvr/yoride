@@ -7,6 +7,7 @@ import ActivePage from "../../Components/ActivePage/ActivePage";
 import HistoryPage from "../../Containers/HistoryPage/HistoryPage";
 import AddPage from "../../Components/AddPage/AddPage";
 import Form from "../Form/Form";
+import moment from 'moment'
 import firebase from "firebase/app";
 import "./App.css";
 import Spinner from "../../Components/UI/Spinner/Spinner";
@@ -23,8 +24,10 @@ class App extends Component {
     isOk: false
   };
   componentWillMount = () => {
-    let today = new Date();
-    let lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+    let today = moment()._d
+    let lastWeek = moment().subtract(7, 'days')._d;
+    let tomorrow = moment().add(1, 'days')._d
+    let yest = moment().subtract(1, 'days')._d
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         let uid = user.uid;
@@ -65,7 +68,8 @@ class App extends Component {
                       el.passengers = passengersArr;
                     });
                   }
-                  if(new Date(el.date) < today)
+                  console.log(new Date(el.date) <= yest)
+                  if(new Date(el.date) <= yest)
                     historyTrips.push(el)
                   else
                     takenTrips.push(el);
@@ -118,6 +122,7 @@ class App extends Component {
           isAuth: false,
           userId: null,
           suggestedTrips: null,
+          historyTrips: null,
           takenTrips: null,
           user: null
         });
@@ -157,7 +162,7 @@ class App extends Component {
     });
   };
   render() {
-    console.log(this.state.historyTrips)
+    // console.log(this.state)
     let app;
     if (
       (this.state.isAuth &&

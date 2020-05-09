@@ -22,7 +22,7 @@ class HistoryPage extends Component {
     };
     render() {
         if(!this.props.isAuth) this.props.history.push('/');
-        let content = this.props.historyTrips !== null ?
+        let content = this.props.historyTrips.length ?
             <ResultList
               historyTrips={this.props.historyTrips}
               toggle={this.toggleTripPage}

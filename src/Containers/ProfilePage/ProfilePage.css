@@ -1,7 +1,7 @@
 
 .card {
     background-color: aliceblue;
-    margin: 10% auto;
+    margin: 130px auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 300px;
     height: fit-content;
@@ -54,4 +54,32 @@
 .title {
   color: grey;
   font-size: 18px;
+}
+
+.reviews{
+    width: 90%;
+    margin: 0 auto;
+    height: 50px;
+    border: 1px solid lightslategray;
+    border-radius: 3px;
+    font-style: oblique;
+    background-color: rgb(226, 226, 226);
+    font-size: 13px;
+    text-align: left;
+    overflow: auto;
+}
+
+.reviews ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.reviews ::-webkit-scrollbar{
+    width: 7px;
+}
+
+.reviews p {
+    margin: 6px;
+    border-bottom: 1px solid rgba(134, 146, 158, 0.5);
 }

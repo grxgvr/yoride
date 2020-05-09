@@ -32,43 +32,65 @@ class SearchPage extends Component {
         .child("/")
         .orderByChild("from")
         .startAt(from);
-      let results = [];
-      let trip, alsoTo;
+      let results = [], alsoTo;
       ref.once("value", snap => {
-        snap.forEach(entry => {
-          trip = entry.val();
-          if(trip.alsoTo)
-            alsoTo = trip.alsoTo.indexOf(to) > -1
-          if ((trip.to.indexOf(to) > -1 || alsoTo) &&
-            new Date(trip.date) > new Date(date.value))
-            {
-              trip.id = entry.key;
-              let driver, info, ref = firebase.database().ref(`/users/${trip.driver}`)
-              ref.once("value", snap => {
-                info = snap.val();
-                info.id = snap.key;
-                trip.driver = {...info};
-              });
-              if (trip.passengers) {
-                trip.seatsRemain = trip.seatsRemain - trip.passengers.length;
-                let passengersArr = [];
-                trip.passengers.forEach(id => {
-                  ref = firebase.database().ref(`/users/${id}`);
-                  ref.once("value", snap => {
-                    info = snap.val();
-                    info.id = snap.key;
-                    passengersArr.push(info);
-                  });
-                  trip.passengers = passengersArr;
-                });
+        let count = 0, len = snap.numChildren();
+        let p3 = new Promise((resolve, rej) => {
+          snap.forEach(entry => {
+            let trip = entry.val();
+            let check = (trip = null) => {
+              count++;
+              // console.group()
+              // console.log(count)
+              // console.log(trip)
+              // console.groupEnd()
+              if(trip !== null)
+                results.push(trip)
+              if(count === len)
+                resolve(results)
             }
-            if(trip.seatsRemain > 0)
-            results.push(trip);
-            }
-        });
-        if (results.length > 0)
+            if(trip.alsoTo !== null);
+              alsoTo = trip.alsoTo.indexOf(to) > -1
+            if ((trip.to.indexOf(to) > -1  || alsoTo) && trip.from.indexOf(from) > -1 &&
+              new Date(trip.date) >= new Date(date.value)) {
+                trip.id = entry.key;
+                let info
+                let driverRef = firebase.database().ref(`/users/${trip.driver}`);
+                driverRef.once('value', snap => {
+                  return snap
+                })
+                .then(driver => {
+                  let dInfo = driver.val();
+                  dInfo.id = driver.key;
+                  trip.driver = {...dInfo}
+                  if (trip.passengers) {
+                    trip.seatsRemain = trip.seatsRemain - trip.passengers.length;
+                    let passengersArr = [], passCount = 0;
+                    trip.passengers.forEach(id => {
+                      ref = firebase.database().ref(`/users/${id}`);
+                      ref.once("value", snap => {
+                        info = snap.val();
+                        info.id = snap.key;
+                        passengersArr.push(info);
+                        passCount++
+                        if(passCount == trip.passengers.length){
+                          trip.passengers = passengersArr;
+                          return trip
+                        }
+                      })
+                      .then(trip => trip);
+                    });
+                  } else return trip
+                })
+                .then(trip => check(trip))
+              } else check()
+          });
+        })
+        p3.then(res => {
+          if (results.length > 0)
           this.setState({ searchResults: results, isLoading: false });
-        else this.setState({ isLoading: false });
+          else this.setState({ isLoading: false });
+        })
       });
     }
   };

@@ -20,7 +20,7 @@ const input = (props) => {
           inputEl = <input type="date" min={today} id = 'date' className={classes} defaultValue={today} placeholder={props.placeholder}/>
           break;
         case "textarea":
-          inputEl = <textarea rows='2' className = 'textArea' placeholder={props.placeholder} onChange={props.changed} defaultValue={props.defaultValue}/>;
+          inputEl = <textarea rows='2' id = {props.id} className = 'textArea' placeholder={props.placeholder} onChange={props.changed} defaultValue={props.defaultValue}/>;
           break;
         case "time":
           inputEl = <input type="time" className={classes} value={props.value} onChange={props.changed} placeholder={props.placeholder}/>;

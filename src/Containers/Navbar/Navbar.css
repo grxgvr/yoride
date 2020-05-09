@@ -94,7 +94,7 @@ li span {
 
 @media (max-width: 900px) {
   .bar li{
-    font-size: 10px;
+    font-size: 11px;
   }
   #brand {
     font-size: 20px;

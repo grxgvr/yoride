@@ -8,14 +8,16 @@
   background-color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
   display: flex;
+  overflow: auto;
 }
 .tripContent {
   font-size: 16px;
   background-color: #fefefe;
   margin: 85px auto;
   border: 1px solid #888;
-  width: 40%;
+  width: 500px;
   cursor: default;
+  height: fit-content;
   border-radius: 25px;
   vertical-align: middle;
   overflow: auto;
